@@ -1,0 +1,72 @@
+﻿@model List<Libro>
+
+@{
+    List<int> idslibros =
+    Context.Session.GetObject<List<int>>("IDSLIBROS");
+}
+
+<h1 style="color:fuchsia">
+    LIBROS Session List OK
+</h1>
+
+<p>
+    <a asp-controller="Libros"
+       asp-action="LibrosAlmacenadosOk">
+        Libros almacenados Session
+    </a>
+</p>
+<h3 style="color:blue">
+    @ViewData["MENSAJE"]
+</h3>
+<ul class="list-group">
+    @foreach (Libro lib in Model)
+    {
+        <li class="list-group-item list-group-item-success">
+            @lib.Titulo
+            <img style="width:100px ; height:100px" src="/images/@lib.Portada" />
+            @if (idslibros == null)
+            {
+                <a asp-controller="Libros"
+                   asp-action="SessionLibrosOk"
+                   asp-route-idlibro="@lib.IdLibro">
+                    Añadir a carrito
+                </a>
+                <a asp-controller="Libros"
+                   asp-action="Details"
+                   asp-route-idlibro="@lib.IdLibro"
+                   class="btn btn-info">
+                    Details
+                </a>
+            }
+            else
+            {
+                //PREGUNTAMOS SI EL EMPLEADO QUE ESTAMOS DIBUJANDO
+                //ESTA DENTRO DE SESSION
+                if (idslibros.Contains(lib.IdLibro))
+                {
+                    //SI ESTA DENTRO DE SESSION, DIBUJAMOS IMAGEN
+                    <span class="btn btn-info">seleccionado</span>
+                }
+                else
+                {
+                    @* <a asp-controller="Libros"
+                       asp-action="SessionLibrosOk"
+                       asp-route-idempleado="@lib.IdLibro">
+                        Comprar
+                    </a> *@
+                    <a asp-controller="Libros"
+                       asp-action="SessionLibrosOk"
+                       asp-route-idlibro="@lib.IdLibro">
+                        Añadir a carrito
+                    </a>
+                    <a asp-controller="Libros"
+                       asp-action="Details"
+                       asp-route-idlibro="@lib.IdLibro"
+                       class="btn btn-info">
+                        Details
+                    </a>
+                }
+            }
+        </li>
+    }
+</ul>

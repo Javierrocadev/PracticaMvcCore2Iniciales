@@ -1,0 +1,31 @@
+﻿@{
+    List<Libro> libros =
+            Context.Session.GetObject<List<Libro>>("LIBROS");
+}
+
+<h1>LIBROS EN TU CARRITO Session</h1>
+
+<p>
+    <a asp-controller="Libros"
+       asp-action="SessionLibros">
+        Almacenar Libros Session
+    </a>
+</p>
+@if (libros == null)
+{
+    <h2 style="color:red">
+        No hay libros en tu carrito Session
+    </h2>
+}
+else
+{
+    <ul class="list-group">
+        @foreach (Libro lib in libros)
+        {
+            <li class="list-group-item">
+              titulo:  @lib.Titulo, precio: @lib.Precio
+            </li>
+            <a class="btn btn-danger" asp-controller="Libros" asp-action="LibrosAlmacenadosOk" asp-route-ideliminar="@lib.IdLibro" >Quitar</a>
+        }
+    </ul>
+}

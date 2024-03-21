@@ -12,11 +12,20 @@
 else
 {
     <li class="nav-item">
+        <a asp-controller="PedidosView"
+           asp-action="PedidosUsuario"
+           class="nav-link">
+            Tus pedidos <span style="color:blue">
+
+            </span>
+        </a>
+    </li>
+    <li class="nav-item">
         <a asp-controller="Managed"
            asp-action="Logout"
            class="nav-link">
             Log out <span style="color:blue">
-                @Context.User.Identity.Name
+               
             </span>
         </a>
     </li>
@@ -24,7 +33,7 @@ else
         <a asp-controller="Usuarios"
            asp-action="PerfilUsuario"
            class="nav-link">
-            Mi perfil
+            Hola,  @Context.User.FindFirst("Nombre").Value
         </a>
     </li>
 }

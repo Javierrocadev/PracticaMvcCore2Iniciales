@@ -9,7 +9,7 @@
         Nombre: @Context.User.FindFirst("Nombre").Value
     </li>
     <li class="list-group-item">
-        Apellido: @Context.User.FindFirst("Apellidos").Value
+        Apellido: @Context.User.FindFirst("Apellidos").Value 
     </li>
     <img src="/images/@Context.User.FindFirst("Foto").Value" />
 </ul>

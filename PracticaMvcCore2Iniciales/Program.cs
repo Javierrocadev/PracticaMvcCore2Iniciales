@@ -39,6 +39,9 @@ builder.Services.AddControllersWithViews();
 string connectionString =
     builder.Configuration.GetConnectionString("SqlHospital");
 builder.Services.AddTransient<RepositoryUsuarios>();
+builder.Services.AddTransient<RepositoryLibros>();
+builder.Services.AddTransient<RepositoryGeneros>();
+builder.Services.AddTransient<RepositoryVistaPedidos>();
 builder.Services.AddDbContext<UsuariosContext>
     (options => options.UseSqlServer(connectionString));
 

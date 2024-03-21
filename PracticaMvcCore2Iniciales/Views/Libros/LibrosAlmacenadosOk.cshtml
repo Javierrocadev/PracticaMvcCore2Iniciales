@@ -1,0 +1,47 @@
+﻿@model List<Libro>
+
+<h1 style="color:fuchsia">
+    Libros almacenados OK
+</h1>
+
+<p>
+    <a asp-controller="Libros"
+       asp-action="SessionLibrosOk">
+        Almacenar libros
+    </a>
+</p>
+
+<h2 style="color:red">@ViewData["MENSAJE"]</h2>
+
+@if (Model != null)
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Titulo</th>
+                <th>Autor</th>
+                <th>Precio</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Libro lib in Model)
+            {
+                <tr>
+                    <td>@lib.Titulo</td>
+                    <td>@lib.Autor</td>
+                    <td>@lib.Precio</td>
+                    <td>
+                        <a asp-controller="Libros" asp-action="LibrosAlmacenadosOk" asp-route-ideliminar="@lib.IdLibro">
+                            Quitar
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@if (Context.Session.GetString("IDSLIBROS") == null){
+    <h2>no hay libros</h2>
+}
