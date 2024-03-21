@@ -1,0 +1,22 @@
+﻿@using System.Security.Claims
+
+<h1>
+    Perfil de: @Context.User.Identity.Name
+</h1>
+
+<ul class="list-group">
+    <li class="list-group-item">
+        Nombre: @Context.User.FindFirst("Nombre").Value
+    </li>
+    <li class="list-group-item">
+        Apellido: @Context.User.FindFirst("Apellidos").Value
+    </li>
+    <img src="/images/@Context.User.FindFirst("Foto").Value" />
+</ul>
+<h2>Todos los Claims</h2>
+<ul>
+    @foreach (Claim claim in Context.User.Claims)
+    {
+        <li>@claim.Type: <b>@claim.Value</b></li>
+    }
+</ul>
