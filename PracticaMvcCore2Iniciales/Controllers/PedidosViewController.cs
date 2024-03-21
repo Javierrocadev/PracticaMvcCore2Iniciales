@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PracticaMvcCore2Iniciales.Filters;
 using PracticaMvcCore2Iniciales.Models;
 using PracticaMvcCore2Iniciales.Repositories;
 using System.Security.Claims;
@@ -20,6 +21,7 @@ namespace PracticaMvcCore2Iniciales.Controllers
             return View(model);
         }
 
+        [AuthorizeUsuarios]
         public async Task<IActionResult> PedidosUsuario()
         {
             // Obtener el ClaimsPrincipal del usuario actual
